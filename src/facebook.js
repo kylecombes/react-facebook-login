@@ -195,8 +195,11 @@ class FacebookLogin extends React.Component {
       params.auth_type = 'reauthenticate';
     }
 
+    let prms = objectToParams(params);
+    console.log(`Params: ${this.props} to ${prms}`)
+
     if (this.props.isMobile && !disableMobileRedirect) {
-      window.location.href = `//www.facebook.com/dialog/oauth?${objectToParams(params)}`;
+      window.location.href = `//www.facebook.com/dialog/oauth?${prms}`;
     } else {
       window.FB.login(this.checkLoginState, { scope, auth_type: params.auth_type });
     }
