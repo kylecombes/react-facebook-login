@@ -46,6 +46,7 @@ class FacebookLogin extends React.Component {
     size: PropTypes.string,
     fields: PropTypes.string,
     cssClass: PropTypes.string,
+    responseType: PropTypes.string,
     version: PropTypes.string,
     icon: PropTypes.any,
     language: PropTypes.string,
@@ -70,6 +71,7 @@ class FacebookLogin extends React.Component {
     version: '2.3',
     language: 'en_US',
     disableMobileRedirect: false,
+    responseType: 'code',
     isMobile: getIsMobile(),
     tag: 'button',
     onFailure: null,
@@ -172,7 +174,7 @@ class FacebookLogin extends React.Component {
       return;
     }
     this.setState({ isProcessing: true });
-    const { scope, appId, onClick, reAuthenticate, redirectUri, disableMobileRedirect } = this.props;
+    const { scope, appId, onClick, reAuthenticate, redirectUri, disableMobileRedirect, responseType } = this.props;
 
     if (typeof onClick === 'function') {
       onClick(e);
@@ -186,6 +188,7 @@ class FacebookLogin extends React.Component {
       redirect_uri: redirectUri,
       state: 'facebookdirect',
       scope,
+      responseType,
     };
 
     if (reAuthenticate) {
